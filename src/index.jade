@@ -1,0 +1,232 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title Introduction to Vim
+
+    link(rel='stylesheet', type='text/css', href='build/build.css')
+
+  body
+
+    article
+
+      section
+        h1 Introduction to Vim
+        br
+        h2 Authored by <a href="http://joeynguyen.com">Joey Nguyen</a>
+        h3 Powered by <a href="https://github.com/markdalgleish/bespoke.js">Bespoke.js</a>
+
+      section
+        h1 Pros
+        br
+        ul
+          li(data-bespoke-bullet) Quickly navigate and edit a text document using only the keyboard (no mouse)
+          li(data-bespoke-bullet) Extremely Customizable - Powerful and vast library of plugins
+          li(data-bespoke-bullet) Available almost anywhere - Edit local and remote (SSH) files and on systems without a GUI editor, e.g. Raspberry Pi, arduino
+          li(data-bespoke-bullet) FREE - Never pay for another third-party text editor
+          li(data-bespoke-bullet) Allows for editing files that GUI editors can't edit due to file permissions - "sudo vim"
+          li(data-bespoke-bullet) Modular - key commands can be combined in different ways to do powerful stuff (more on this later)
+
+      section
+        h1 Cons
+        br
+        ul
+          li(data-bespoke-bullet) Steep learning curve for users used to GUI editors like Coda or Sublime Text
+          li(data-bespoke-bullet) No bells and whistles like syntax highlighting or indentation out of the box. Have to search for plugins to get extra features.
+          li(data-bespoke-bullet) Plugins may sometimes conflict with one another and you'll have to figure out which one(s) are the culprit
+
+      section
+        h1 3 Vim modes
+        br
+        h2 Command mode - navigating and manipulating text
+        br
+        h2 Insert mode - writing text as if in a normal text editor
+        br
+        h2 Visual mode - selecting text using movement keys
+
+      section
+        h1 How to switch between modes
+        br
+        ul
+          li <strong>Command mode</strong> - this is the default mode. To switch back to it from another mode, press the 'Esc' key
+          li <strong>Insert mode</strong> - 'i' key
+          li <strong>Visual mode</strong> - 'v', 'Ctrl-v', or 'Shift-v'. (We'll go into the differences later)
+
+      section(data-bespoke-state='emphatic')
+        h1 Learning the Command Mode
+
+      section
+        h1 Single character movement
+        br
+        h2 h, j, k, l
+        h2 left, down, up, right
+
+      section
+        h1 Multi-character movement
+        br
+        ul
+          li <strong>w</strong> - move forward one word
+          li <strong>b</strong> - move back one word
+          li <strong>e</strong> - move to end of word
+          li <strong>0</strong> - move to beginning of line
+          li <strong>^</strong> - move to the first non-whitespace character of line
+          li <strong>$</strong> - move to end of line
+          li <strong>f-[key]</strong> - move forward to next instance of [key]
+          li <strong>F-[key]</strong> - move backward to last instance of [key]
+
+      section
+        h1 Multi-line movement
+        br
+        ul
+          li <strong>gg</strong> - move to the first line of the document
+          li <strong>G</strong> - move to the last line of the document
+          li <strong>[number]-G</strong> - move the line number in the document. Example: 42G moves your cursor to line 42. (Enable line numbers in Vim to make this easier to use.)
+          li <strong>Ctrl-e/y</strong> - scroll one line down/up
+          li <strong>Ctrl-u/d</strong> - scroll up/down
+          li <strong>Ctrl-f/b</strong> - page forward/back
+          li <strong>H/M/L</strong> - move cursor to top/middle/bottom of screen
+
+      section
+        h1 Combining numbers with movement
+        br
+        ul
+          li <strong>5w</strong> - move forward 5 words
+          li <strong>3j</strong> - move down 3 lines
+          li <strong>d4b</strong> - delete backwards 4 words
+
+      section
+        h1 Manipulating text
+        br
+        ul
+          li <strong>x</strong> - delete character under cursor
+          li <strong>r-[key]</strong> - replace character under cursor with [key]
+          li <strong>~</strong> - toggle lowercase/uppercase of letter under cursor
+          li <strong>u</strong> - undo last change
+          li <strong>Ctrl-r</strong> - redo last change
+          li <strong>.</strong> - Repeats the last command you did
+
+      section
+        h1 Copy and paste
+        br
+        ul
+          li  <strong>y-[movement]</strong> - copy (or yank as it's referred to in Vim)
+          li  <strong>d-[movement]</strong> - delete (while yanking)
+          li  <strong>yy</strong> - copies line that cursor is on
+          li  <strong>dd</strong> - delete line that cursor is on
+          li  <strong>dw</strong> - delete word under cursor
+          li  <strong>d$</strong> - delete to end of line
+          li  <strong>di(</strong> - delete inner parentheses. Delete everything inside the parentheses
+          li  <strong>y0</strong> - yank to beginning of line
+          li  <strong>p</strong> - paste after cursor the last yanked item
+          li  <strong>P</strong> - paste before cursor the last yanked item
+
+      section
+        h1 Search (and move to)
+        br
+        ul
+          li <strong>/keyword[Enter]</strong> - search forward
+          li <strong>?keyword[Enter]</strong> - search backwards
+          li <strong>n</strong> - next match
+          li <strong>N</strong> - previous match
+
+      section
+        h1 Search (and replace)
+        br
+        ul
+          li <strong>:%s/word1/word2/g</strong> - replace every instance of 'word1' with 'word2' for entire document
+          li <strong>:%s/word1/word2/gc</strong> - replace every instance of 'word1' with 'word2' for entire document but ask for confirmation for each one
+          li <strong>:5,12s/word1/word2/g</strong> - replace 'word1' with 'word2' for only lines 5 through 12
+          li <strong>:5,12s/word1\//word2/g</strong> - replace 'word1/' with 'word2' using \ to escape a special character for only lines 5 through 12
+
+      section
+        h1 Other commands
+        br
+        ul
+          li <strong>:w</strong> - Save the file
+          li <strong>:q</strong> - Quit the file
+          li <strong>:wq</strong> - Save and quit
+          li <strong>:![terminal command]</strong> - Run a terminal command while in Vim. Example: :<strong>!ls</strong>
+
+      section(data-bespoke-state='emphatic')
+        h1 Learning the Insert Mode
+
+      section
+        h1 Ways to enter Insert mode
+        br
+        ul
+          li <strong>i</strong> - most common way. Start typing at the cursor
+          li <strong>I</strong> - Move to beginning of the line and enter Insert mode
+          li <strong>a</strong> - Start typing one character after the cursor
+          li <strong>A</strong> - Move to end of the line and enter Insert mode
+          li <strong>s</strong> - replace character under cursor and then enter Insert mode
+          li <strong>o/O</strong> - open new line below/above cursor
+          li <strong>cw</strong> - replace word under cursor and then enter Insert mode
+          li <strong>ci"</strong> - change inner quotes. Delete everything inside the quotes and enter Insert mode
+          li <strong>C</strong> - Delete rest of line from cursor and enter Insert mode
+          li <strong>R</strong> - enter Replace mode
+
+      section
+        h1 Faster editing in Insert mode
+        br
+        ul
+          li <strong>ctrl-w</strong> - delete backwards one word
+          li <strong>ctrl-u</strong> - delete everything on the line before the cursor
+          li <strong>ctrl-a</strong> - move to beginning of line
+          li <strong>ctrl-e</strong> - move to end of line
+
+      section(data-bespoke-state='emphatic')
+        h1 Learning the Visual mode
+
+      section
+        h1 3 types of Visual mode
+        br
+        ul
+          li <strong>v</strong> - select text starting from the initial position of cursor to ending position
+          li <strong>Ctrl-v</strong> - select blocks of text by column
+          li <strong>Shift-v</strong> - select lines of text
+
+      section
+        h1 Commands while in Visual mode
+        br
+        ul
+          li <strong>Shift-<</strong> - indent the line(s) backward
+          li <strong>Shift-></strong> - indent the line(s) forward
+          li <strong>J</strong> - combine all lines
+          li <strong>d</strong> - delete all
+          li <strong>y</strong> - yank all
+
+      section
+        h1 Vim Buffers
+        ul
+          li <strong>:e [filename]</strong> - open another file in a buffer
+          li <strong>:ls</strong> - list all files in the buffer
+          li <strong>:b-[number]</strong> - switch to the file associated with the buffer number
+
+      section
+        h1 Useful Vim plugins
+        ul
+          li <strong>Easymotion</strong> - Move around Vim quickly
+          li <strong>IndentHTML</strong> - Automatic HTML Indentation
+          li <strong>JShint</strong> - JavaScript linter
+          li <strong>MatchTagAlways</strong> - HTML tag matching highlighting
+          li <strong>Minibufexpl</strong> - See Buffers as tabs
+          li <strong>NERDtree</strong> - File explorer
+          li <strong>NeoBundle</strong> - Plugins manager for Vim
+          li <strong>Seek</strong> - Better alternative to Vim's built-in 'f' move to character
+          li <strong>TComment</strong> - Quickly comment/uncomment code
+          li <strong>Unite</strong> - Fuzzy file searching and code searching
+          li <strong>vim-colorschemes</strong> - lots of color schemes to choose from
+
+      section
+        h1 Additional Resources
+        p <a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb">Vimium</a> - a Chrome extension to navigate the browser using Vim key bindings
+        br
+        p <a href="http://www.turnkeylinux.org/blog/vim-tutorial">another Vim tutorial</a> - learn other things Vim can do
+        br
+        p <a href="https://www.dropbox.com/s/0xj6vf3lt7lpg8e/vimrc">my .vimrc file</a> - my entire Vim configuration
+
+      section(data-bespoke-state='emphatic')
+        h1 Questions?
+
+    script(src='build/build.js')
